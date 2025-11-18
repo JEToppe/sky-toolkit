@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sky Watching Toolkit - Your Guide to the Greatest Show Above</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(180deg, #0a0e27 0%, #1a237e 50%, #e91e63 100%);
+            min-height: 100vh;
+            color: #ffffff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        /* Animated stars background */
+        body::before {
+            content: '';
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20px 30px, white, transparent),
+                radial-gradient(2px 2px at 40px 70px, white, transparent),
+                radial-gradient(1px 1px at 50px 50px, white, transparent),
+                radial-gradient(1px 1px at 80px 80px, white, transparent),
+                radial-gradient(2px 2px at 130px 40px, white, transparent);
+            background-size: 200px 200px;
+            animation: twinkle 10s ease-in-out infinite;
+            opacity: 0.3;
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.1; }
+        }
+        
+        .container {
+            position: relative;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            z-index: 1;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 60px;
+            animation: fadeInDown 1s ease-out;
+        }
+        
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        h1 {
+            font-size: 2.5em;
+            font-weight: 700;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #667eea 0%, #f093fb 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .tagline {
+            font-size: 1.1em;
+            color: #b8c5ff;
+            font-weight: 300;
+        }
+        
+        .live-banner {
+            background: rgba(46, 125, 50, 0.3);
+            border: 1px solid #4caf50;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 40px;
+            text-align: center;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+        
+        .live-banner h3 {
+            color: #81c784;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 5px;
+        }
+        
+        .section {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            animation: fadeInUp 1s ease-out;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .section-icon {
+            font-size: 1.8em;
+            margin-right: 15px;
+        }
+        
+        h2 {
+            font-size: 1.5em;
+            font-weight: 600;
+        }
+        
+        .resource-card {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .resource-card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateX(5px);
+        }
+        
+        .resource-title {
+            font-size: 1.2em;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #ffffff;
+        }
+        
+        .resource-description {
+            color: #b8c5ff;
+            font-size: 0.95em;
+            margin-bottom: 12px;
+        }
+        
+        .resource-link {
+            display: inline-block;
+            color: #64b5f6;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        .resource-link:hover {
+            color: #90caf9;
+            text-decoration: underline;
+        }
+        
+        .badge {
+            display: inline-block;
+            background: rgba(103, 58, 183, 0.3);
+            color: #b39ddb;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            margin-left: 8px;
+            font-weight: 600;
+        }
+        
+        .badge.essential {
+            background: rgba(255, 152, 0, 0.3);
+            color: #ffb74d;
+        }
+        
+        .badge.new {
+            background: rgba(244, 67, 54, 0.3);
+            color: #ef5350;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .spot-card {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            padding: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.3s ease;
+        }
+        
+        .spot-card:hover {
+            background: rgba(255, 255, 255, 0.08);
+        }
+        
+        .spot-name {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .spot-detail {
+            font-size: 0.85em;
+            color: #b8c5ff;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .footer p {
+            color: #b8c5ff;
+            font-size: 0.9em;
+        }
+        
+        /* Mobile responsive */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2em;
+            }
+            
+            .section {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Johannes' Sky Watching Toolkit</h1>
+            <p class="tagline">Your Guide to the Greatest Show Above</p>
+        </header>
+        
+        <div class="live-banner">
+            <h3>🔴 Solar Maximum 2024-2025</h3>
+            <p>Aurora activity at 11-year peak - visible from Toronto area!</p>
+        </div>
+        
+        <!-- Aurora Tracking Section -->
+        <div class="section">
+            <div class="section-header">
+                <span class="section-icon">🌌</span>
+                <h2>Aurora Tracking</h2>
+            </div>
+            
+            <div class="resource-card">
+                <div class="resource-title">My Aurora Forecast & Alerts <span class="badge essential">ESSENTIAL</span></div>
+                <div class="resource-description">
+                    Real-time aurora predictions with push notifications. Get alerts when aurora might be visible in your area. Shows KP index, cloud cover, and viewing probability all in one place.
+                </div>
+                <a href="https://play.google.com/store/apps/details?id=com.jrustonapps.myauroraforecast" class="resource-link" target="_blank">Android</a> | 
+                <a href="https://apps.apple.com/app/id1073082439" class="resource-link" target="_blank">iOS</a>
+            </div>
+            
+            <div class="resource-card">
+                <div class="resource-title">Space Weather Live</div>
+                <div class="resource-description">
+                    The most comprehensive space weather data. Real-time solar wind data, detailed aurora oval maps, and 3-day forecasts. Check the "Aurora" tab for current visibility maps over North America.
+                </div>
+                <a href="https://www.spaceweatherlive.com" class="resource-link" target="_blank">Visit Website →</a>
+            </div>
+            
+            <div class="resource-card">
+                <div class="resource-title">Ontario Aurora Chasers <span class="badge">COMMUNITY</span></div>
+                <div class="resource-description">
+                    Active Facebook group with 30,000+ members sharing real-time sightings across Ontario. Members post alerts when aurora is visible, share photos, and give location-specific viewing tips. Essential for "is it out tonight?" confirmation.
+                </div>
+                <a href="https://www.facebook.com/groups/ontarioaurorachasers" class="resource-link" target="_blank">Join Facebook Group →</a>
+            </div>
+        </div>
+        
+        <!-- Sunset & Sunrise Tools Section -->
+        <div class="section">
+            <div class="section-header">
+                <span class="section-icon">🌅</span>
+                <h2>Sunset & Sunrise Tools</h2>
+            </div>
+            
+            <div class="resource-card">
+                <div class="resource-title">SunsetHue <span class="badge essential">ESSENTIAL</span></div>
+                <div class="resource-description">
+                    Predicts sunset and sunrise quality based on atmospheric conditions. Uses weather data to rate viewing conditions from 'Poor' to 'Great'. Perfect for photographers and sunrise chasers - know before you go!
+                </div>
+                <a href="https://sunsethue.com" class="resource-link" target="_blank">Visit Website →</a>
+            </div>
+            
+            <div class="resource-card">
+                <div class="resource-title">PhotoPills</div>
+                <div class="resource-description">
+                    The Swiss Army knife for sky photographers. Plan exact sun/moon positions, golden hour times, and milky way visibility. AR mode lets you visualize where celestial objects will be at any time.
+                </div>
+                <a href="https://www.photopills.com" class="resource-link" target="_blank">Learn More →</a>
+            </div>
+            
+            <div class="resource-card">
+                <div class="resource-title">Windy.com</div>
+                <div class="resource-description">
+                    Advanced weather visualization with detailed cloud cover forecasts. Essential for clear sky planning. Use the cloud cover layer to find gaps in clouds up to 10 days ahead.
+                </div>
+                <a href="https://www.windy.com" class="resource-link" target="_blank">Visit Website →</a>
+            </div>
+        </div>
+        
+        <!-- Dark Sky & Stargazing Section -->
+        <div class="section">
+            <div class="section-header">
+                <span class="section-icon">⭐</span>
+                <h2>Dark Sky & Stargazing</h2>
+            </div>
+            
+            <div class="resource-card">
+                <div class="resource-title">Light Pollution Map <span class="badge essential">ESSENTIAL</span></div>
+                <div class="resource-description">
+                    Interactive map showing light pollution levels worldwide. Find the darkest skies near you. Toggle different years to see how light pollution has changed. Essential for finding Milky Way viewing spots.
+                </div>
+                <a href="https://www.lightpollutionmap.info" class="resource-link" target="_blank">Open Map →</a>
+            </div>
+            
+            <div class="resource-card">
+                <div class="resource-title">Stellarium</div>
+                <div class="resource-description">
+                    Realistic sky simulator showing exactly what's visible from your location. Available as web, desktop, and mobile app. Perfect for identifying constellations, planets, and satellites.
+                </div>
+                <a href="https://stellarium-web-engine.org" class="resource-link" target="_blank">Web Version →</a>
+            </div>
+            
+            <div class="resource-card">
+                <div class="resource-title">Clear Outside</div>
+                <div class="resource-description">
+                    7-day hourly forecast specifically for astronomers. Shows cloud cover at different altitudes, seeing conditions, and transparency. Includes ISS pass predictions for your location.
+                </div>
+                <a href="https://clearoutside.com" class="resource-link" target="_blank">Visit Website →</a>
+            </div>
+        </div>
+        
+        <!-- Toronto Sky Spots Section -->
+        <div class="section">
+            <div class="section-header">
+                <span class="section-icon">📍</span>
+                <h2>Toronto Sky Spots</h2>
+            </div>
+            
+            <h3 style="margin-bottom: 15px; color: #ffb74d;">🌅 Sunrise Top Picks</h3>
+            <div class="grid">
+                <div class="spot-card">
+                    <div class="spot-name">Tommy Thompson Park</div>
+                    <div class="spot-detail">Unobstructed east view over lake -- my personal favourite for pre-work sunrises</div>
+                </div>
+                <div class="spot-card">
+                    <div class="spot-name">Trillium Park East</div>
+                    <div class="spot-detail">Beautiful city skyline in the background, nice rocks to sit on</div>
+                </div>
+                <div class="spot-card">
+					<div class="spot-name">Looking West on Dundas/Spadina (Underrated sunset) </div>
+                    <div class="spot-detail">If you're lucky, you can catch the sun setting in between buildings on the street</div>
+                </div>
+            </div>
+            
+            <h3 style="margin: 25px 0 15px; color: #81c784;">🌌 Aurora & Dark(er) Sky</h3>
+            <div class="grid">
+                <div class="spot-card">
+                    <div class="spot-name">Torrance Barrens</div>
+                    <div class="spot-detail">2 hrs north - Dark Sky Preserve</div>
+                </div>
+                <div class="spot-card">
+                    <div class="spot-name">Any dark spot on the dark sky map finder!</div>
+                    <div class="spot-detail">Personally, I'll just look for dark spots on the https://www.lightpollutionmap.info/ 
+					website and drive there.</div>
+                </div>
+            </div>
+            
+            <p style="margin-top: 20px; font-size: 0.9em; color: #b8c5ff;">
+                💡 <strong>Aurora Tip:</strong> Any spot with a clear northern horizon works during strong activity (KP 7+). It is 10000% worth driving out of the city to escape light pollution
+            </p>
+        </div>
+        
+        <!-- Additional Resources Section -->
+        <div class="section">
+            <div class="section-header">
+                <span class="section-icon">📚</span>
+                <h2>Learn & Connect</h2>
+            </div>
+            
+            <div class="resource-card">
+                <div class="resource-title">SpaceWeather.com</div>
+                <div class="resource-description">
+                    Daily space weather news and aurora gallery. Great for understanding what's happening with the sun and why aurora appears.
+                </div>
+                <a href="https://spaceweather.com" class="resource-link" target="_blank">Visit →</a>
+            </div>
+            
+            <div class="resource-card">
+                <div class="resource-title">TimeandDate Astronomy</div>
+                <div class="resource-description">
+                    Comprehensive astronomy calendar with meteor showers, eclipses, and celestial events for your exact location.
+                </div>
+                <a href="https://www.timeanddate.com/astronomy/" class="resource-link" target="_blank">Visit →</a>
+            </div>
+            
+            <div class="resource-card">
+                <div class="resource-title">Secret Flying</div>
+                <div class="resource-description">
+                    The closer you get to the Earth's poles, the lower the KP index needed to see Aurora. This is my favourite website to 
+					get alerts on cheap flight tickets -- you can sign up for alerts for your home aiport and you will get emails whenever they find 
+					amazing deals from your home airport.
+                </div>
+                <a href="https://www.secretflying.com/" class="resource-link" target="_blank">Join →</a>
+            </div>
+        </div>
+        
+        <footer class="footer">
+            <p>🌟 The sky is calling. Will you answer?</p>
+            <p style="margin-top: 10px; font-size: 0.8em;">Created with passion by Johannes Toppe</p>
+        </footer>
+    </div>
+</body>
+</html>
